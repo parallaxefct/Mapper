@@ -6,7 +6,7 @@ import re
 #provide url // assign entire string to varible // parse string via BeautifulSoup // returns anchor to TAGS
 def parse_url(url):
     html = urllib.request.urlopen(url).read()
-    sifter = BeautifulSoup(html, 'html.parser')
+    sifter = BeautifulSoup(html, 'html.parser') #this returns the
     #sifter pulls html anchors and assigns to 'tags' varibale
     tags = sifter('a', None)
     return tags
