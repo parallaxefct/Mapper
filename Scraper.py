@@ -3,7 +3,7 @@ import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 import re
 
-#provide url // assign entire string to varible // parse string via BeautifulSoup // capture anchors to TAGS
+#provide url // assign entire string to varible // parse string via BeautifulSoup // returns anchor to TAGS
 def parse_url(url):
     html = urllib.request.urlopen(url).read()
     sifter = BeautifulSoup(html, 'html.parser')
@@ -11,24 +11,35 @@ def parse_url(url):
     tags = sifter('a', None)
     return tags
 #passes anchor_tags and position // iterates through list and captures url at position and returns
-def cycle_links(anchor_tags, position):
+def cycle_links(anchor_tags):
     for tag in anchor_tags:
         #gets HTML tag as string
         x = tag.get('href', None)
         position -= 1
-
-        if position == 0:
-            break
     return x
+
+
+def keyword_parser(keyword):
+    html = urllib.request.urlopen(url).read()
+    sifter = BeautifulSoup(html, 'html.parser')
+    return sifter
+
 
 url = input('Enter URL: ')
 choice = input('Search for URL, keyword, or word list? ').lower()
 
+
+#decision tree: URL
 if choice == 'url':
-    url_list = parse_url(url)
+    anchor_list = parse_url(url)
+    total_url = cycle_links(anchor_list)
+    print(total_url)
 
+#decision tree: KEYWORD
 elif choice == 'keyword':
+    keyword = input('Enter keyword: ').lower()
 
+#decision tree: WORD LIST
 elif choice == 'word list':
 
 
