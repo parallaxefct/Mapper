@@ -10,7 +10,6 @@ def parse_url(url):
     #sifter pulls html anchors and assigns to 'tags' varibale
     tags = sifter('a', None)
     return tags
-
 #passes anchor_tags and position // iterates through list and captures url at position and returns
 def cycle_links(anchor_tags, position):
     for tag in anchor_tags:
@@ -23,8 +22,18 @@ def cycle_links(anchor_tags, position):
     return x
 
 url = input('Enter URL: ')
-count = int(input('Enter count: '))
-position = int(input('Enter position: '))
+choice = input('Search for URL, keyword, or word list? ').lower()
+
+if choice == 'url':
+    url_list = parse_url(url)
+
+elif choice == 'keyword':
+
+elif choice == 'word list':
+
+
+#count = int(input('Enter count: '))
+#position = int(input('Enter position: '))
 
 
 #pass url through and recieve anchor list
