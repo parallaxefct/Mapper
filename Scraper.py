@@ -1,24 +1,26 @@
-#connect to given webpage // scrape for all URL links
+#for any given webpage, the user has the option of finding all URL/Hyperlinks // the top 3 words that appear on webpage // eventually map out the webserver and all its links
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 import re
 
-#provide url // assign entire string to varible // parse string via BeautifulSoup // returns anchor to TAGS
+
+#takes HTML, parses through and returns all anchor tags
 def parse_url(url):
-    html = urllib.request.urlopen(url).read()
-    sifter = BeautifulSoup(html, 'html.parser') #this returns the
-    #sifter pulls html anchors and assigns to 'tags' varibale
-    tags = sifter('a', None)
+    html = urllib.request.urlopen(url).read() #opens URL
+    sifter = BeautifulSoup(html, 'html.parser') #sifts and return one large string
+    tags = sifter('a', None) #extracts all anchor tags
     return tags
-#passes anchor_tags and position // iterates through list and captures url at position and returns
-def cycle_links(anchor_tags):
-    for tag in anchor_tags:
+
+#takes all anchor tags, captures URLs and returns total list of URL
+def cycle_links(anchor_list):
+    all_urls = []
+    for tag in anchor_list:
         #gets HTML tag as string
         x = tag.get('href', None)
-        position -= 1
-    return x
+        all_urls.append(x)
+    return all_urls
 
-
+#passes a keyword,
 def keyword_parser(keyword):
     html = urllib.request.urlopen(url).read()
     sifter = BeautifulSoup(html, 'html.parser')
@@ -26,7 +28,7 @@ def keyword_parser(keyword):
 
 
 url = input('Enter URL: ')
-choice = input('Search for URL, keyword, or word list? ').lower()
+choice = input('Search for URL, keyword, or map? ').lower()
 
 
 #decision tree: URL
@@ -38,26 +40,11 @@ if choice == 'url':
 #decision tree: KEYWORD
 elif choice == 'keyword':
     keyword = input('Enter keyword: ').lower()
+    top_words = keyword_parser(keyword)
+    print(top_words)
 
 #decision tree: WORD LIST
-elif choice == 'word list':
+elif choice == 'map':
 
-
-#count = int(input('Enter count: '))
-#position = int(input('Enter position: '))
-
-
-#pass url through and recieve anchor list
-anchor_tags = parse_url(url)
-#cycle through links based on VALUE of position // return URL
-parsed_link = cycle_links(anchor_tags, position)
-
-
-while count != 1:
-    #pass new URL through and recieve new anchor list
-    anchor_tags = parse_url(parsed_link)
-    #cycle through new list of anchor tags
-    parsed_link = cycle_links(anchor_tags, position)
-    count -= 1
 
 print(parsed_link)
