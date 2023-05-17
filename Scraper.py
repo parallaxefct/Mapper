@@ -2,11 +2,17 @@
 import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 import re
+import ssl
+
+# Ignore SSL certificate errors
+ctx = ssl.create_default_context()
+ctx.check_hostname = False
+ctx.verify_mode = ssl.CERT_NONE
 
 
 #takes HTML, parses through and returns all anchor tags
 def parse_url(url):
-    html = urllib.request.urlopen(url).read() #opens URL
+    html = urllib.request.urlopen(url, context=ctx).read() #opens URL
     sifter = BeautifulSoup(html, 'html.parser') #sifts and return one large string
     tags = sifter('a', None) #extracts all anchor tags
     return tags
@@ -44,7 +50,7 @@ elif choice == 'keyword':
     print(top_words)
 
 #decision tree: URL MAPPING
-elif choice == 'map':
+#elif choice == 'map':
 
 
 print(parsed_link)
