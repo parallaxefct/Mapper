@@ -33,7 +33,7 @@ url = input('Enter entire URL: ')
 choice = input('I can capture all URLs on a single webpage OR map out all URLs on a web server. Page or Map?: ').lower() #figure out how to add
 
 
-#decision tree: URL
+#decision tree: Page
 if choice == 'page':
     page_urls = parse_url(url)
     print(page_urls)
